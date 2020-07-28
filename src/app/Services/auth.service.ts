@@ -4,6 +4,10 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, retry} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IRegisterUser} from '../Interfaces/Account/register-user';
+import {ICurrentUser} from '../Interfaces/Account/current-user';
+import {ILoginUser} from '../Interfaces/Account/login-user';
+import {IResponseResult} from '../Interfaces/Common/IResponseResult';
+import {ILoginUserResponse} from '../Interfaces/Account/login-user-response';
 
 
 @Injectable({
@@ -11,7 +15,8 @@ import {IRegisterUser} from '../Interfaces/Account/register-user';
 })
 export class AuthService {
 
-  // private currentUser: BehaviorSubject<CurrentUserDTO> = new BehaviorSubject<CurrentUserDTO>(null);
+  private currentUser: BehaviorSubject<ICurrentUser> = new BehaviorSubject<ICurrentUser>(null);
+
 
   constructor(
     private http: HttpClient,
@@ -19,15 +24,15 @@ export class AuthService {
   ) {
   }
 
-  // setCurrentUser(user: CurrentUserDTO): void {
-  //   this.currentUser.next(user);
-  // }
-  //
-  // getCurrentUser(): Observable<CurrentUserDTO> {
-  //   return this.currentUser;
-  // }
+  setCurrentUser(user: ICurrentUser): void {
+    this.currentUser.next(user);
+  }
 
+  getCurrentUser(): Observable<ICurrentUser> {
+    return this.currentUser;
+  }
 
+  //#region " Register User "
   registerUser(registerData: IRegisterUser): Observable<any> {
     return this.http.post<any>('/account/register', registerData)
       .pipe(
@@ -39,15 +44,29 @@ export class AuthService {
             verticalPosition: 'top',
             direction: 'rtl'
           });
-
         })
       );
   }
 
-  // loginUser(loginUserDTO: LoginUserDTO): Observable<ILoginUserAccount> {
-  //   return this.http.post<ILoginUserAccount>('/account/login', loginUserDTO);
-  // }
-  //
+  //#endregion
+
+  //#region " Login User "
+  loginUser(user: ILoginUser): Observable<IResponseResult<ILoginUserResponse>> {
+    return this.http.post<IResponseResult<ILoginUserResponse>>('/account/login', user).pipe(
+      retry(3),
+      catchError((err) => {
+        throw this.snackBar.open('خطا در برقراری ارتباط با سرور دقایقی بعد دوباره امتحان کنید', 'باشه', {
+          duration: 10000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          direction: 'rtl'
+        });
+      })
+    );
+  }
+
+  //#endregion
+
   // checkUserAuth(): Observable<ICheckUserAuthResult> {
   //   return this.http.post<ICheckUserAuthResult>('/account/check-auth', null);
   // }
@@ -56,8 +75,10 @@ export class AuthService {
   //   return this.http.get('/account/sign-out');
   // }
   //
-  activateUser(emailActiveCode: string): Observable<any> {
+
+  //#region " Active Acount "
+  activateAccount(emailActiveCode: string): Observable<any> {
     return this.http.get('/account/activate-account/' + emailActiveCode);
   }
-
+  //#region
 }

@@ -22,7 +22,7 @@ export class ActiveAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.authService.activateUser(this.activatedRoute.snapshot.params.activeCode).subscribe(res => {
+    this.authService.activateAccount(this.activatedRoute.snapshot.params.activeCode).subscribe(res => {
       if (res.status === 'Success') {
         this.isLoading = false;
         this.snackBar.open('حساب کاربری شما فعال شد', 'باشه', {

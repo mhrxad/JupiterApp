@@ -1,10 +1,84 @@
 <mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" *ngIf="!isLoading">
   <mat-tab label="ورود">
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-4">
+
+      <mat-card fxFlex.lt-md="100" fxFlex.md="60" fxFlex="50">
+        <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>فرم ثبت نام</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+
+            <!--#region " Email & Password " -->
+            <div fxLayout="row" fxLayout.lt-sm="column">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>ایمیل</mat-label>
+                  <input matInput type="text" formControlName="email" placeholder="example@example.com" required>
+                  <mat-error *ngIf="LF.email.errors?.required">
+                    لطفا ایمیل خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="LF.email.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 320 باشد
+                  </mat-error>
+                  <mat-error *ngIf="LF.email.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 6 باشد
+                  </mat-error>
+                  <mat-error *ngIf="LF.email.errors?.email">
+                    ایمیل معتبر نیست
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>کلمه عبور</mat-label>
+                  <input matInput [type]="passHide ? 'password' : 'text'" formControlName="password" required>
+                  <button type="button" mat-icon-button matSuffix (click)="passHide = !passHide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="passHide">
+                    <mat-icon>{{passHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="LF.password.errors?.required">
+                    لطفا کلمه عبور را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="LF.password.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 100 باشد
+                  </mat-error>
+                  <mat-error *ngIf="LF.password.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 6 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+            <!--#endregion -->
+
+
+            <div fxLayout="row" fxLayout.lt-sm="column" class="mt-3">
+              <div fxFlex="100" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <p *ngIf="RF.passwordValidator">کلمه عبور و تکرار کلمه عبور با هم مطابقت ندارند</p>
+              </div>
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions fxLayoutAlign="center center">
+            <button mat-raised-button class="ml-4" color="primary" type="submit" [disabled]="!loginForm.valid">ورود
+            </button>
+            <button mat-raised-button color="warn" type="reset">خالی کردن فرم</button>
+          </mat-card-actions>
+        </form>
+
+      </mat-card>
+
+    </div>
 
 
   </mat-tab>
+  <!--#region " Register Tab " -->
   <mat-tab label="ثبت نام">
-
     <div fxLayout="row" fxLayoutAlign="center center" class="p-4">
 
       <mat-card fxFlex.lt-md="100" fxFlex.md="60" fxFlex="50">
@@ -46,6 +120,7 @@
 
             </div>
             <!--#endregion -->
+
             <!--#region " Email & membershipNumber " -->
             <div fxLayout="row" fxLayout.lt-sm="column">
 
@@ -86,6 +161,7 @@
 
             </div>
             <!--#endregion -->
+
             <!--#region " National Code & Mobile Number " -->
             <div fxLayout="row" fxLayout.lt-sm="column">
 
@@ -124,6 +200,7 @@
 
             </div>
             <!--#endregion -->
+
             <!--#region " Date Of Birth & Gender " -->
             <div fxLayout="row" fxLayout.lt-sm="column">
 
@@ -224,9 +301,8 @@
       </mat-card>
 
     </div>
-
-
   </mat-tab>
+  <!--#endregion -->
 </mat-tab-group>
 
 
@@ -240,3 +316,5 @@
 <!--#endregion-->
 
 <router-outlet></router-outlet>
+
+<p>{{loginForm.value | json}}</p>
