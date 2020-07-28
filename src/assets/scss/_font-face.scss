@@ -1,0 +1,48 @@
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+
+  @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+    $src: null;
+
+    $extmods: (
+      eot: "?",
+      svg: "#" + str-replace($name, " ", "_")
+    );
+
+    $formats: (
+      otf: "opentype",
+      ttf: "truetype"
+    );
+
+    @each $ext in $exts {
+      $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+      $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+      $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+    }
+
+    @font-face {
+      font-family: quote($name);
+      font-style: $style;
+      font-weight: $weight;
+      src: $src;
+    }
+  }
+
+
+  //@include font-face(IRANSans,"../font/IRANSansWeb/IRANSansWeb", normal, normal, eot woff2 woff ttf);
+  @include font-face(IRANSans,"/assets/font/IRANSansWeb/IRANSansWeb", normal, normal, eot woff2 woff ttf);
+  @include font-face(IRANSans,"/assets/font/IRANSansWeb_Bold/IRANSansWeb_Bold", normal, bold, eot woff2 woff ttf);
+  @include font-face(IRANSans,"/assets/font/IRANSansWeb_Light/IRANSansWeb_Light", normal, 300, eot woff2 woff ttf);
+  @include font-face(IRANSans,"/assets/font/IRANSansWeb_Medium/IRANSansWeb_Medium", normal, 500, eot woff2 woff ttf);
+  @include font-face(IRANSans,"/assets/font/IRANSansWeb_UltraLight/IRANSansWeb_UltraLight", normal, 200, eot woff2 woff ttf);
+
+
+
+  //@include font-face(Vazir,       "../font/Vazir/Vazir", normal, normal, eot woff2 woff ttf);
+  @include font-face(Vazir,       "/assets/font/Vazir/Vazir", normal, normal, eot woff2 woff ttf);
+  @include font-face(Vazir-Bold,  "/assets/font/Vazir/Vazir-Bold", normal, bold, eot woff2 woff ttf);
+  @include font-face(Vazir-Light, "/assets/font/Vazir/Vazir-Light", normal, 300, eot woff2 woff ttf);
+  @include font-face(Vazir-Medium,"/assets/font/Vazir/Vazir-Medium", normal, 500, eot woff2 woff ttf);
+  @include font-face(Vazir-Thin,  "/assets/font/Vazir/Vazir-Thin", normal, 200, eot woff2 woff ttf);
+
+

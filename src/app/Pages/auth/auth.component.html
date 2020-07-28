@@ -1,0 +1,241 @@
+<mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" *ngIf="!isLoading">
+  <mat-tab label="ورود">
+
+
+  </mat-tab>
+  <mat-tab label="ثبت نام">
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="p-4">
+
+      <mat-card fxFlex.lt-md="100" fxFlex.md="60" fxFlex="50">
+        <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>فرم ثبت نام</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+
+            <!--#region " Name & Family " -->
+            <div fxLayout="row" fxLayout.lt-sm="column">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>نام</mat-label>
+                  <input matInput type="text" formControlName="firstName" required>
+                  <mat-error *ngIf="RF.firstName.errors?.required">
+                    لطفا نام خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.firstName.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 50 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>نام خانوادگی</mat-label>
+                  <input matInput type="text" formControlName="lastName" required>
+                  <mat-error *ngIf="RF.lastName.errors?.required">
+                    لطفا نام خانوادگی خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.lastName.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 50 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <!--#endregion -->
+            <!--#region " Email & membershipNumber " -->
+            <div fxLayout="row" fxLayout.lt-sm="column">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>ایمیل</mat-label>
+                  <input matInput type="text" formControlName="email" placeholder="example@example.com" required>
+                  <mat-error *ngIf="RF.email.errors?.required">
+                    لطفا ایمیل خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.email.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 320 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.email.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 6 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.email.errors?.email">
+                    ایمیل معتبر نیست
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>شماره دانشجویی / استادی</mat-label>
+                  <input matInput type="text" formControlName="membershipNumber" required>
+                  <mat-error *ngIf="RF.membershipNumber.errors?.required">
+                    لطفا شماره دانشجویی / استادی خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.membershipNumber.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 12 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.membershipNumber.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 8 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <!--#endregion -->
+            <!--#region " National Code & Mobile Number " -->
+            <div fxLayout="row" fxLayout.lt-sm="column">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>کد ملی</mat-label>
+                  <input matInput type="text" formControlName="nationalCode" required>
+                  <mat-error *ngIf="RF.nationalCode.errors?.required">
+                    لطفا کد ملی را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.nationalCode.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 10 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.nationalCode.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 10 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>شماره تلفن همراه</mat-label>
+                  <input matInput type="text" formControlName="mobileNumber" placeholder="9120000000" required>
+                  <span matSuffix>98+ &nbsp;</span>
+                  <mat-error *ngIf="RF.mobileNumber.errors?.required">
+                    لطفا شماره تلفن همراه را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.mobileNumber.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 10 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.mobileNumber.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 10 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <!--#endregion -->
+            <!--#region " Date Of Birth & Gender " -->
+            <div fxLayout="row" fxLayout.lt-sm="column">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>تاریخ تولد</mat-label>
+                  <input matInput type="text" formControlName="dateOfBirth" placeholder="روز / ماه / سال" required>
+                  <mat-error *ngIf="RF.dateOfBirth.errors?.required">
+                    لطفا تاریخ تولد را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.dateOfBirth.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 10 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.dateOfBirth.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 10 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-label class="ml-3">جنسیت:</mat-label>
+                <mat-radio-group formControlName="gender" aria-label="Select gender">
+                  <mat-radio-button class="ml-2" value="1" checked>مذکر</mat-radio-button>
+                  <mat-radio-button value="0">مونث</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+            </div>
+            <!--#endregion -->
+
+            <!--#region " Password & Confirm Password " -->
+            <div fxLayout="row" fxLayout.lt-sm="column" class="mt-4">
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>کلمه عبور</mat-label>
+                  <input matInput [type]="passHide ? 'password' : 'text'" formControlName="password" required>
+                  <button type="button" mat-icon-button matSuffix (click)="passHide = !passHide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="passHide">
+                    <mat-icon>{{passHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="RF.password.errors?.required">
+                    لطفا کلمه عبور را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.password.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 100 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.password.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 6 باشد
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <mat-form-field appearance="outline">
+                  <mat-label>تکرار کلمه عبور</mat-label>
+                  <input matInput [type]="passHide ? 'password' : 'text'" formControlName="confirmPassword" required>
+                  <button type="button" mat-icon-button matSuffix (click)="passHide = !passHide" [attr.aria-label]="'Hide password'"
+                          [attr.aria-pressed]="passHide">
+                    <mat-icon>{{passHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="RF.confirmPassword.errors?.required">
+                    لطفا تکرار کلمه عبور خود را وارد نمایید
+                  </mat-error>
+                  <mat-error *ngIf="RF.confirmPassword.errors?.maxlength">
+                    تعداد کاراکترها نمیتواند بیشتر از 100 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.confirmPassword.errors?.minlength">
+                    تعداد کاراکترها نمیتواند کمتر از 6 باشد
+                  </mat-error>
+                  <mat-error *ngIf="RF.confirmPassword.errors?.mustMatch">
+                    تکرار کلمه عبور با کلمه عبور مطابقت ندارد
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+
+
+            </div>
+
+            <!--#endregion -->
+
+            <div fxLayout="row" fxLayout.lt-sm="column" class="mt-3">
+              <div fxFlex="100" fxLayoutAlign="center center" fxLayoutAlign.lt-sm="start center">
+                <p *ngIf="RF.passwordValidator">کلمه عبور و تکرار کلمه عبور با هم مطابقت ندارند</p>
+              </div>
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions fxLayoutAlign="center center">
+            <button mat-raised-button class="ml-4" color="primary" type="submit" [disabled]="!registerForm.valid">ثبت
+            </button>
+            <button mat-raised-button color="warn" type="reset">خالی کردن فرم</button>
+          </mat-card-actions>
+        </form>
+
+      </mat-card>
+
+    </div>
+
+
+  </mat-tab>
+</mat-tab-group>
+
+
+
+<!--#region " Date Of Birth & Gender " -->
+<div fxLayout="column" fxLayoutAlign="center center" class="spinner" *ngIf="isLoading">
+  <div>
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<!--#endregion-->
+

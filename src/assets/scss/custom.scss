@@ -1,0 +1,22 @@
+html, body { height: 100%;}
+
+body {
+  margin: 0;
+  font-family: 'Vazir', 'IRANSans';
+  font-size: 14px;
+  background-color: rgb(236, 239, 241);
+}
+
+*{
+  font-family: 'Vazir', 'IRANSans';
+  margin: 0;
+  padding: 0;
+}
+
+.spinner{
+  height: 100%;
+}
+
+mat-sidenav-content{
+  background-color: rgb(236, 239, 241);
+}
