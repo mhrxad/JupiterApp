@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'jalali-moment';
 import {MustMatch} from '../../Utilities/Validators/must-match.validator';
-import {IRegisterUser} from '../../Interfaces/Account/IRegisterUser';
+import {IRegisterUser} from '../../Interfaces/Account/register-user';
 
 @Component({
   selector: 'app-auth',
@@ -76,43 +76,32 @@ export class AuthComponent implements OnInit {
       password: this.registerForm.controls.password.value,
       confirmPassword: this.registerForm.controls.confirmPassword.value,
     };
-    console.log(this.registerData);
 
     this.authService.registerUser(this.registerData).subscribe(res => {
-        if (res.status === 'Success') {
-          this.registerForm.reset(res, {emitEvent: true, onlySelf: true});
-          this.isLoading = false;
-          this.snackBar.open('ثبت نام شما با موفقیت انجام شد لینک فعال سازی حساب کاربری به ایمیل شما ارسال گردید', 'باشه', {
-            duration: 10000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            direction: 'rtl'
-          });
-          // this.router.navigate(['auth']);
-          this.router.navigate(null, {relativeTo: this.activatedRoute});
-        }
-        if (res.status === 'Error') {
-          if (res.data.info === 'EmailExist') {
-            this.isLoading = false;
-            this.snackBar.open('با این ایمیل قبلا ثبت نام انجام شده است', 'باشه', {
-              duration: 10000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-              direction: 'rtl'
-            });
-          }
-        }
-      },
-      error => {
+      if (res.status === 'Success') {
+        this.registerForm.reset(res, {emitEvent: true, onlySelf: true});
         this.isLoading = false;
-        this.snackBar.open('ارسال اطلاعات انجام نشد دوباره انمتحان کنید', 'باشه', {
+        this.snackBar.open('ثبت نام شما با موفقیت انجام شد لینک فعال سازی حساب کاربری به ایمیل شما ارسال گردید', 'باشه', {
           duration: 10000,
           horizontalPosition: 'end',
           verticalPosition: 'top',
           direction: 'rtl'
         });
+        // this.router.navigate(['auth']);
+        this.router.navigate(null, {relativeTo: this.activatedRoute});
       }
-    );
+      if (res.status === 'Error') {
+        if (res.data.info === 'EmailExist') {
+          this.isLoading = false;
+          this.snackBar.open('با این ایمیل قبلا ثبت نام انجام شده است', 'باشه', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            direction: 'rtl'
+          });
+        }
+      }
+    });
   }
 
 // #endregion

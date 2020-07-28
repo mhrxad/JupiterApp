@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {IRegisterUser} from '../Interfaces/Account/IRegisterUser';
 import {catchError, retry} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {IRegisterUser} from '../Interfaces/Account/register-user';
 
 
 @Injectable({
@@ -56,8 +56,8 @@ export class AuthService {
   //   return this.http.get('/account/sign-out');
   // }
   //
-  // activateUser(emailActiveCode: string): Observable<any> {
-  //   return this.http.get('/account/activate-account/' + emailActiveCode);
-  // }
+  activateUser(emailActiveCode: string): Observable<any> {
+    return this.http.get('/account/activate-account/' + emailActiveCode);
+  }
 
 }
