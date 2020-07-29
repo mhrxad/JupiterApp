@@ -1,4 +1,6 @@
-html, body { height: 100%;}
+html, body {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -7,16 +9,71 @@ body {
   background-color: rgb(236, 239, 241);
 }
 
-*{
+* {
   font-family: 'Vazir', 'IRANSans';
   margin: 0;
   padding: 0;
 }
 
-.spinner{
+.spinner {
   height: 100%;
 }
 
-mat-sidenav-content{
+mat-sidenav-content {
   background-color: rgb(236, 239, 241);
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.is-mobile .menu-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+h1.app-name {
+  margin-left: 8px;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.auth-background {
+  @media only screen and (max-width: 768px) {
+    background-image: url('../images/site/auth-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 100%;
+  }
+  @media only screen and (min-width: 768px) {
+    background-image: url('../images/site/auth-background.jpg');
+    background-repeat: no-repeat;
+    background-size: inherit;
+    min-height: 100%;
+    min-width: 100%;
+  }
+
+}
+
+
+
+
+
+

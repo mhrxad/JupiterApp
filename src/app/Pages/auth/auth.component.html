@@ -1,4 +1,6 @@
-<mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" *ngIf="!isLoading">
+<mat-tab-group mat-align-tabs="center" color="accent" backgroundColor="primary" class="auth-background" *ngIf="!isLoading">
+
+  <!--#region " Login Tab " -->
   <mat-tab label="ورود">
     <div fxLayout="row" fxLayoutAlign="center center" class="p-4">
 
@@ -74,9 +76,9 @@
       </mat-card>
 
     </div>
-
-
   </mat-tab>
+  <!--#endregion -->
+
   <!--#region " Register Tab " -->
   <mat-tab label="ثبت نام">
     <div fxLayout="row" fxLayoutAlign="center center" class="p-4">
@@ -307,14 +309,10 @@
 
 
 
-<!--#region " Date Of Birth & Gender " -->
+<!--#region " Spinner " -->
 <div fxLayout="column" fxLayoutAlign="center center" class="spinner" *ngIf="isLoading">
   <div>
     <mat-spinner></mat-spinner>
   </div>
 </div>
-<!--#endregion-->
-
-<router-outlet></router-outlet>
-
-<p>{{loginForm.value | json}}</p>
+<!--#endregion " End Spinner "-->

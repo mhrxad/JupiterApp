@@ -33,10 +33,15 @@ $dark-theme:   mat-dark-theme((
 ));
 
 .dark-theme {
-  background-color: black;
+  mat-sidenav-content{
+    background-color: black !important;
+  }
+  background-color: black !important;
   color: white;
   @include angular-material-color($dark-theme);
 }
+
+
 
 
 

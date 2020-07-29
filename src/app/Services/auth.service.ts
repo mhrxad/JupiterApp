@@ -8,6 +8,7 @@ import {ICurrentUser} from '../Interfaces/Account/current-user';
 import {ILoginUser} from '../Interfaces/Account/login-user';
 import {IResponseResult} from '../Interfaces/Common/IResponseResult';
 import {ILoginUserResponse} from '../Interfaces/Account/login-user-response';
+import {ICheckUserAuth} from '../Interfaces/Account/check-user-auth';
 
 
 @Injectable({
@@ -67,10 +68,10 @@ export class AuthService {
 
   //#endregion
 
-  // checkUserAuth(): Observable<ICheckUserAuthResult> {
-  //   return this.http.post<ICheckUserAuthResult>('/account/check-auth', null);
-  // }
-  //
+  checkUserAuth(): Observable<IResponseResult<ICheckUserAuth>> {
+    return this.http.post<IResponseResult<ICheckUserAuth>>('/account/check-auth', null);
+  }
+
   // logOutUser(): Observable<any> {
   //   return this.http.get('/account/sign-out');
   // }
