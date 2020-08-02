@@ -7,4 +7,6 @@ export interface ILoginUserResponse {
   userId : number;
   avatar : string;
   role : string;
+  email: string;
+  gender: boolean;
 }

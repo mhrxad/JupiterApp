@@ -50,6 +50,9 @@
         <a mat-list-item routerLink="/">
           <mat-icon class="mx-3">home</mat-icon>
           خانه</a>
+        <a mat-list-item *ngxPermissionsOnly="['Professor']" routerLink="/create-message">
+          <mat-icon class="mx-3">create</mat-icon>
+          افزودن پیام جدید</a>
         <a mat-list-item>
           <mat-icon class="mx-3">info</mat-icon>
           درباره ما</a>
@@ -61,7 +64,8 @@
     <!--#endregion "End Side Nav "-->
 
     <mat-sidenav-content>
-      <router-outlet [class.dark-mode]="darktheme"></router-outlet>
+      <router-outlet [class.dark-mode]="darktheme">
+      </router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

@@ -15,7 +15,7 @@ import {ICheckUserAuth} from '../Interfaces/Account/check-user-auth';
   providedIn: 'root'
 })
 export class AuthService {
-
+  user: boolean;
   private currentUser: BehaviorSubject<ICurrentUser> = new BehaviorSubject<ICurrentUser>(null);
 
 
@@ -72,6 +72,8 @@ export class AuthService {
     return this.http.post<IResponseResult<ICheckUserAuth>>('/account/check-auth', null);
   }
 
+
+
   // logOutUser(): Observable<any> {
   //   return this.http.get('/account/sign-out');
   // }
@@ -81,5 +83,6 @@ export class AuthService {
   activateAccount(emailActiveCode: string): Observable<any> {
     return this.http.get('/account/activate-account/' + emailActiveCode);
   }
+
   //#region
 }

@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="p-4">
+
+
+  <mat-card fxFlex="100">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>ارسال پیام</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <quill-editor placeholder="پیام خود را وارد کنید" trackChanges="all" [(ngModel)]="htmlText"
+                    (onEditorCreated)="activateRTL($event)">
+
+      </quill-editor>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center center">
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+
+<div>{{ htmlText }}</div>

@@ -97,6 +97,7 @@ export class AuthComponent implements OnInit {
       };
 
       this.authService.registerUser(this.registerData).subscribe(res => {
+        console.log(res);
         if (res.status === 'Success') {
           this.registerForm.reset(res, {emitEvent: true, onlySelf: true});
           this.isLoading = false;
@@ -145,7 +146,10 @@ export class AuthComponent implements OnInit {
           firstName: res.data.firstName,
           lastName: res.data.lastName,
           avatar: res.data.avatar,
-          role: res.data.role
+          role: res.data.role,
+          email: res.data.email,
+          gender: res.data.gender,
+
         };
 
         if (res.status === 'Success') {

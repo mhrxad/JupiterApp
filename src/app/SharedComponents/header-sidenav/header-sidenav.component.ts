@@ -4,6 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ICurrentUser} from '../../Interfaces/Account/current-user';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @Component({
   selector: 'app-header-sidenav',
@@ -23,22 +24,27 @@ export class HeaderSidenavComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private permissionsService: NgxPermissionsService,
   ) {
   }
 
   ngOnInit(): void {
+    const perm = [];
+
 
     this.authService.getCurrentUser().subscribe(res => {
       this.user = res;
     });
-
+    perm.push([this.user.role]);
     if (localStorage.getItem('theme') === 'dark') {
       this.renderer.addClass(document.body, 'dark-theme');
       this.darktheme = localStorage.getItem('theme');
     }
 
 
+    console.log(perm);
+    this.permissionsService.loadPermissions(perm);
   }
 
   logOutUser() {

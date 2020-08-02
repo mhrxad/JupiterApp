@@ -10,6 +10,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppInterceptor} from './Utilities/AppInterceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DpDatePickerModule} from 'ng2-jalali-date-picker';
+import {AuthGuard} from './Guards/auth.guard';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { QuillModule } from 'ngx-quill'
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import {DpDatePickerModule} from 'ng2-jalali-date-picker';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    NgxPermissionsModule.forRoot(),
+    QuillModule.forRoot(),
   ],
   providers: [
     {
@@ -33,7 +38,8 @@ import {DpDatePickerModule} from 'ng2-jalali-date-picker';
       useClass: AppInterceptor,
       multi: true
     },
-    CookieService
+    CookieService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

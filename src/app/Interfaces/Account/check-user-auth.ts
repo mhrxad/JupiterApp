@@ -4,4 +4,6 @@ export interface ICheckUserAuth {
   userId : number;
   avatar : string;
   role : string;
+  email: string;
+  gender: boolean;
 }

@@ -19,17 +19,22 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authService.checkUserAuth().subscribe(res => {
       if (res.status === 'Success') {
-
         this.user = {
           userId: res.data.userId,
           firstName: res.data.firstName,
           lastName: res.data.lastName,
           avatar: res.data.avatar,
-          role: res.data.role
+          role: res.data.role,
+          email: res.data.email,
+          gender: res.data.gender
         };
+        console.log(res);
         this.authService.setCurrentUser(this.user);
       }
     });
+
+
+
   }
 
 }
